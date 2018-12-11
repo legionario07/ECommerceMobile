@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">ECommerceMobile</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="disp">Disponivel</string>
+    <string name="vend">Vendidos</string>
 </resources>

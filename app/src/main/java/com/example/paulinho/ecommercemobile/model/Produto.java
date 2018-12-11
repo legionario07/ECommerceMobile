@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+
 public class Produto implements Serializable {
 
-    private String id;
+    private Integer id;
+    private String identificacao;
     private String siteId;
     private String title;
     private Vendedor seller;
@@ -38,22 +40,29 @@ public class Produto implements Serializable {
     private Review review;
     private Tag tags;
 
-    public Produto(String id){
+    private String sku;
+    private Integer stockMin;
+    private Integer stockIdeal;
+    private BigDecimal lucroEsperado;
+    private BigDecimal valorDeCompra;
+    private BigDecimal valorDeVenda;
+    private Integer qteDisponivel;
+    private Integer totalVendido;
+
+    public Produto(Integer id){
         this();
         this.id = id;
+    }
+
+    public Produto(String sku){
+        this();
+        this.sku = sku;
     }
 
     public Produto(){
         attributes = new ArrayList<Atributo>();
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getSiteId() {
         return siteId;
@@ -78,6 +87,7 @@ public class Produto implements Serializable {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+        this.valorDeVenda = price;
     }
 
     public String getCurrencyId() {
@@ -94,6 +104,7 @@ public class Produto implements Serializable {
 
     public void setAvailableQuantity(BigDecimal availableQuantity) {
         this.availableQuantity = availableQuantity;
+        this.qteDisponivel = availableQuantity.intValue();
     }
 
     public BigDecimal getSoldQuantity() {
@@ -102,6 +113,7 @@ public class Produto implements Serializable {
 
     public void setSoldQuantity(BigDecimal soldQuantity) {
         this.soldQuantity = soldQuantity;
+        this.totalVendido = soldQuantity.intValue();
     }
 
     public String getBuyingMode() {
@@ -282,5 +294,86 @@ public class Produto implements Serializable {
 
     public void setThumbnailIS(InputStream thumbnailIS) {
         this.thumbnailIS = thumbnailIS;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
+    }
+
+    public Integer getStockMin() {
+        return stockMin;
+    }
+
+    public void setStockMin(Integer stockMin) {
+        this.stockMin = stockMin;
+    }
+
+    public Integer getStockIdeal() {
+        return stockIdeal;
+    }
+
+    public void setStockIdeal(Integer stockIdeal) {
+        this.stockIdeal = stockIdeal;
+    }
+
+    public BigDecimal getLucroEsperado() {
+        return lucroEsperado;
+    }
+
+    public void setLucroEsperado(BigDecimal lucroEsperado) {
+        this.lucroEsperado = lucroEsperado;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getIdentificacao() {
+        return identificacao;
+    }
+
+    public void setIdentificacao(String identificacao) {
+        this.identificacao = identificacao;
+        this.sku = identificacao;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public BigDecimal getValorDeCompra() {
+        return valorDeCompra;
+    }
+
+    public void setValorDeCompra(BigDecimal valorDeCompra) {
+        this.valorDeCompra = valorDeCompra;
+    }
+
+    public BigDecimal getValorDeVenda() {
+        return valorDeVenda;
+    }
+
+    public void setValorDeVenda(BigDecimal valorDeVenda) {
+        this.valorDeVenda = valorDeVenda;
+    }
+
+    public Integer getQteDisponivel() {
+        return qteDisponivel;
+    }
+
+    public void setQteDisponivel(Integer qteDisponivel) {
+        this.qteDisponivel = qteDisponivel;
+    }
+
+    public Integer getTotalVendido() {
+        return totalVendido;
+    }
+
+    public void setTotalVendido(Integer totalVendido) {
+        this.totalVendido = totalVendido;
     }
 }

@@ -130,18 +130,19 @@ public class ConverterToProduto {
 
     public static Produto converterToProduto(LinkedTreeMap<String, Object> object) {
         Produto produto = new Produto();
-        produto.setId(object.get("id").toString());
+        produto.setIdentificacao(object.get("id").toString());
         produto.setSiteId(object.get("site_id").toString());
         produto.setTitle(object.get("title").toString());
         produto.setSeller(getVendedor((LinkedTreeMap<String, String>) (Object) object.get("seller")));
-        String price = String.valueOf(object.get("price"));
-        produto.setPrice(new BigDecimal(price));
-        produto.setCurrencyId(object.get("currency_id").toString());
+        String price = String.valueOf(object.get("price")).trim();
+        produto.setPrice(new BigDecimal(price.trim()));
+        produto.setCurrencyId(object.get("currency_id").toString().trim());
 
-        String availableQuantity = String.valueOf(object.get("available_quantity"));
-        produto.setAvailableQuantity(new BigDecimal(availableQuantity));
+        String availableQuantity = String.valueOf(object.get("available_quantity")).trim();
+        BigDecimal availableQuantityDecimal = new BigDecimal(availableQuantity);
+        produto.setAvailableQuantity(availableQuantityDecimal);
 
-        String soldQuantity = String.valueOf(object.get("sold_quantity"));
+        String soldQuantity = String.valueOf(object.get("sold_quantity")).trim();
         produto.setSoldQuantity(new BigDecimal(soldQuantity));
 
         produto.setBuyingMode(object.get("buying_mode").toString());

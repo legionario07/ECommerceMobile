@@ -22,19 +22,22 @@
         <ImageView
             android:id="@+id/imgProduct"
             android:layout_width="wrap_content"
-            android:layout_weight="3"
+            android:layout_weight="1.5"
+            android:layout_gravity="center"
             android:layout_height="wrap_content" />
 
         <LinearLayout
-            android:layout_weight="7"
+            android:layout_weight="8.5"
             android:layout_width="0dp"
             android:orientation="vertical"
             android:layout_height="wrap_content">
             
             <TextView
                 android:id="@+id/txtTitle"
+                android:textStyle="bold"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:textSize="12sp"
                 android:layout_weight="5"/>
 
             <LinearLayout
@@ -43,8 +46,35 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/txtDescripton"
-                    android:layout_width="wrap_content"
+                    android:text="@string/vend"
+                    style="@style/txtCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.5"/>
+
+                <TextView
+                    android:id="@+id/txtVendido"
+                    style="@style/txtCard"
+                    android:gravity="left"
+                    android:textStyle="bold"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.5"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    style="@style/txtCard"
+                    android:text="@string/disp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3.5"/>
+
+                <TextView
+                    style="@style/txtCard"
+                    android:textStyle="bold"
+                    android:id="@+id/txtQuantidadeDisponivel"
+                    android:layout_width="0dp"
+                    android:gravity="left"
+                    android:layout_weight="1.5"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.example.paulinho.ecommercemobile.R;
 import com.example.paulinho.ecommercemobile.adapters.diff.ProdutoDiffCallback;
 import com.example.paulinho.ecommercemobile.adapters.viewholders.ProdutoViewHolder;
+import com.example.paulinho.ecommercemobile.interfaces.ItemClickListener;
 import com.example.paulinho.ecommercemobile.model.Produto;
 import com.example.paulinho.ecommercemobile.utils.ImagemUtils;
 
@@ -25,6 +26,17 @@ public class ProdutosAdapter extends RecyclerView.Adapter<ProdutoViewHolder> {
     private List<Produto> produtos;
     private Context context;
 
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mListener = listener;
+    }
+
     public ProdutosAdapter(Context context, List<Produto> produtos){
         this.produtos = produtos;
         this.context = context;
@@ -36,7 +48,7 @@ public class ProdutosAdapter extends RecyclerView.Adapter<ProdutoViewHolder> {
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.cardview_produtos, viewGroup, false);
 
-        ProdutoViewHolder produtoViewHolder = new ProdutoViewHolder(view);
+        ProdutoViewHolder produtoViewHolder = new ProdutoViewHolder(view, mListener);
 
         return produtoViewHolder;
     }
@@ -46,9 +58,9 @@ public class ProdutosAdapter extends RecyclerView.Adapter<ProdutoViewHolder> {
 
         Produto produto = produtos.get(i);
 
-        produtoViewHolder.txtDescription.setText(produto.getId());
-
         produtoViewHolder.txtTitle.setText(produto.getTitle());
+        produtoViewHolder.txtVendidos.setText(String.valueOf(produto.getSoldQuantity().intValue()));
+        produtoViewHolder.txtQuantidadeDisponivel.setText(String.valueOf(produto.getAvailableQuantity().intValue()));
 
         if(produtoViewHolder.imgProduct.getDrawable()==null) {
             produtoViewHolder.imgProduct.setImageBitmap(BitmapFactory.decodeStream(produto.getThumbnailIS()));
@@ -87,4 +99,7 @@ public class ProdutosAdapter extends RecyclerView.Adapter<ProdutoViewHolder> {
         this.produtos = produtos;
         diffResult.dispatchUpdatesTo(this);
     }
+
+
+
 }
