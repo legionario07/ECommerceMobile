@@ -4,6 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
+
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -26,6 +30,25 @@
             android:name=".views.ProdutoDetail"
             android:label="@string/detalhes_produto"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+
+
+        <service android:name="com.example.paulinho.ecommercemobile.notification.ProdutoNotificacaoService"
+            android:label="PartidaNotificacaoService">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="TOTAL_PARTIDAS"/>
+            </intent-filter>
+        </service>
+
+        <receiver
+            android:name="com.example.paulinho.ecommercemobile.broadcast.BootReceiver"
+            android:label="BootReceiver"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

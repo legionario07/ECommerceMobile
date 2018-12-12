@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void atualizarDados(){
         MBLServicesImpl services = new MBLServicesImpl();
-        DataForUser dados = services.getDataForUser(169517012);
+        DataForUser dados = services.getDataForUser(ConstraintUtils.CODIGO_CLIENTE);
 
         produtos = ConverterToProduto.getProductsForDataForUser(dados);
 
