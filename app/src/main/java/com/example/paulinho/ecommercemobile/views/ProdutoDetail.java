@@ -91,6 +91,7 @@ public class ProdutoDetail extends AppCompatActivity {
 
         if(produto!=null){
             Toast.makeText(this, "Salvo com sucesso",Toast.LENGTH_LONG).show();
+            finish();
         }else{
             Toast.makeText(this, "Erro ao salvar produto",Toast.LENGTH_LONG).show();
 
