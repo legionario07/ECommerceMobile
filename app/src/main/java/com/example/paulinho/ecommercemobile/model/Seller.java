@@ -1,8 +1,9 @@
 package com.example.paulinho.ecommercemobile.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Seller {
+public class Seller implements Serializable {
     private float id;
     SellerReputation seller_reputationObject;
     private boolean real_estate_agency;

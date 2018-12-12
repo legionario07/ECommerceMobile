@@ -1,8 +1,9 @@
 package com.example.paulinho.ecommercemobile.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Parcela {
+public class Parcela implements Serializable {
 
     private BigDecimal quantity;
     private BigDecimal amount;

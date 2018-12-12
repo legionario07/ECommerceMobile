@@ -3,4 +3,7 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="disp">Disponivel</string>
     <string name="vend">Vendidos</string>
+    <string name="title_activity_produto_detail">ProdutoDetail</string>
+    <string name="valor_compra">Valor Compra</string>
+    <string name="qtde_disponivel">Qtde Disponível</string>
 </resources>

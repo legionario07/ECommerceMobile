@@ -1,8 +1,10 @@
 package com.example.paulinho.ecommercemobile.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Vendedor {
+public class Vendedor implements Serializable
+{
 
     private Double id;
     private String powerSellerStatus;

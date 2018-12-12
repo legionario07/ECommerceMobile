@@ -1,9 +1,10 @@
 package com.example.paulinho.ecommercemobile.model;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Atributo {
+public class Atributo implements Serializable {
     private Map<String, Object> mapAtributos;
 
     public Atributo(){

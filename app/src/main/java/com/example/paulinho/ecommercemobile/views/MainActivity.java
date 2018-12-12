@@ -1,5 +1,6 @@
 package com.example.paulinho.ecommercemobile.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
@@ -21,7 +22,10 @@ import com.example.paulinho.ecommercemobile.converters.ConverterToProduto;
 import com.example.paulinho.ecommercemobile.interfaces.ItemClickListener;
 import com.example.paulinho.ecommercemobile.model.DataForUser;
 import com.example.paulinho.ecommercemobile.model.Produto;
+import com.example.paulinho.ecommercemobile.utils.ConstraintUtils;
+import com.example.paulinho.ecommercemobile.utils.SessionUtil;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -74,35 +78,17 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 Produto produto = produtos.get(position);
 
-                Toast.makeText(getApplicationContext(), produto.getIdentificacao(), Toast.LENGTH_LONG).show();
 
-                ProdutoServicesImpl services = new ProdutoServicesImpl();
-                produto = services.save(produto);
+                SessionUtil.getInstance().clear();
+                SessionUtil.getInstance().setProduto(produto);
 
-                List<Produto> produtos = services.findAll();
+                Intent it = new Intent(getApplicationContext(), ProdutoDetail.class);
+                startActivity(it);
 
-                //Toast.makeText(getApplicationContext(), produto.getProdutoId(), Toast.LENGTH_LONG).show();
             }
         });
 
 
-      /*  recyclerView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(v.getId() == R.id.recyclerView) {
-                    int itemPosition = recyclerView.getChildLayoutPosition(v);
-                    Produto produto = produtos.get(itemPosition);
-
-                    Toast.makeText(getApplicationContext(), produto.getId(), Toast.LENGTH_LONG).show();
-
-                    ProdutoServicesImpl services = new ProdutoServicesImpl();
-                    produto = services.save(produto);
-
-                    Toast.makeText(getApplicationContext(), produto.getProdutoId(), Toast.LENGTH_LONG).show();
-                }
-            }
-        });*/
     }
 
     private void atualizarDados(){

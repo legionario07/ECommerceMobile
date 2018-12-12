@@ -1,4 +1,6 @@
 package com.example.paulinho.ecommercemobile.model;
 
-public class EnderecoVendedor {
+import java.io.Serializable;
+
+public class EnderecoVendedor  implements Serializable {
 }

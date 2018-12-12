@@ -1,8 +1,9 @@
 package com.example.paulinho.ecommercemobile.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Remessa {
+public class Remessa implements Serializable {
 
     private Boolean freeShipping;
     private String mode;

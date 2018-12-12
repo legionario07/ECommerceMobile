@@ -1,6 +1,8 @@
 package com.example.paulinho.ecommercemobile.model;
 
-public class Endereco {
+import java.io.Serializable;
+
+public class Endereco implements Serializable {
 
     private String stateId;
     private String stateName;
