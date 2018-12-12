@@ -70,7 +70,7 @@ public class ProdutoServicesImpl{
         return produto;
     }
 
-    public Produto findBySku(final String sku){
+    public Produto findBySku(final Produto produtoBody, final String sku){
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -83,6 +83,11 @@ public class ProdutoServicesImpl{
                     e.printStackTrace();
                 }
 
+                if(produto!=null){
+                    produtoBody.setValorDeCompra(produto.getValorDeCompra());
+                    produtoBody.setStockIdeal(produto.getStockIdeal());
+                    produtoBody.setStockMin(produto.getStockMin());
+                }
 
 
             }
@@ -94,7 +99,7 @@ public class ProdutoServicesImpl{
             e.printStackTrace();
         }
 
-        return produto;
+        return produtoBody;
     }
 
 }

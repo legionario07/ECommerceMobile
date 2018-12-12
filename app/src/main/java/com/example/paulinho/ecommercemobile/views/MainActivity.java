@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 Produto produto = produtos.get(position);
 
+                produto = new ProdutoServicesImpl().findBySku(produto, produto.getSku());
 
                 SessionUtil.getInstance().clear();
                 SessionUtil.getInstance().setProduto(produto);

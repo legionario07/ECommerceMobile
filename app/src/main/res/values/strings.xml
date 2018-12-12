@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">ECommerceMobile</string>
-    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_main">ECommerceMobile</string>
     <string name="disp">Disponivel</string>
     <string name="vend">Vendidos</string>
     <string name="title_activity_produto_detail">ProdutoDetail</string>
     <string name="valor_compra">Valor Compra</string>
     <string name="qtde_disponivel">Qtde Disponível</string>
+    <string name="detalhes_produto">Detalhes do Produto</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.paulinho.ecommercemobile.views;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,9 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.paulinho.ecommercemobile.R;
+import com.example.paulinho.ecommercemobile.api.services.impl.ProdutoServicesImpl;
 import com.example.paulinho.ecommercemobile.model.Produto;
 import com.example.paulinho.ecommercemobile.utils.ConstraintUtils;
 import com.example.paulinho.ecommercemobile.utils.SessionUtil;
@@ -37,6 +41,8 @@ public class ProdutoDetail extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabSave);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +52,12 @@ public class ProdutoDetail extends AppCompatActivity {
             }
         });
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                salvar();
+            }
+        });
 
         txtTitle = findViewById(R.id.txtTitle);
         inpQtdeDisponivel = findViewById(R.id.inpQtdeDisponivel);
@@ -58,13 +70,53 @@ public class ProdutoDetail extends AppCompatActivity {
         produto = SessionUtil.getInstance().getProduto();
 
         if (produto != null) {
+            getSupportActionBar().setTitle(produto.getIdentificacao());
             setDataInView();
+        }
+
+        if(savedInstanceState!=null){
+            inpStockMin.setText(savedInstanceState.getString("inpStockMin"));
+            inpStockIdeal.setText(savedInstanceState.getString("inpStockIdeal"));
+            inpPrecoCompra.setText(savedInstanceState.getString("inpPrecoCompra"));
         }
 
     }
 
+    private void salvar() {
+
+        getDataInView();
+
+        ProdutoServicesImpl produtoServices = new ProdutoServicesImpl();
+        produto = produtoServices.save(produto);
+
+        if(produto!=null){
+            Toast.makeText(this, "Salvo com sucesso",Toast.LENGTH_LONG).show();
+        }else{
+            Toast.makeText(this, "Erro ao salvar produto",Toast.LENGTH_LONG).show();
+
+        }
+
+    }
+
+    private void getDataInView(){
+        produto.setStockMin(Integer.valueOf(inpStockMin.getText().toString()));
+        produto.setStockIdeal(Integer.valueOf(inpStockIdeal.getText().toString()));
+        produto.setValorDeCompra(new BigDecimal(inpPrecoCompra.getText().toString()));
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putString("inpStockMin", inpStockMin.getText().toString());
+        outState.putString("inpStockIdeal", inpStockIdeal.getText().toString());
+        outState.putString("inpPrecoCompra", inpPrecoCompra.getText().toString());
+
+    }
+
     private void setDataInView() {
-        txtTitle.setText(produto.getIdentificacao());
+
+        txtTitle.setText(produto.getTitle());
         inpQtdeDisponivel.setText(String.valueOf(produto.getAvailableQuantity().intValue()));
         Integer stockMin = produto.getStockMin();
         if (stockMin != null) {
@@ -82,12 +134,23 @@ public class ProdutoDetail extends AppCompatActivity {
 
         BigDecimal precoCompra = produto.getValorDeCompra();
         if (precoCompra != null) {
-            inpStockIdeal.setText(precoCompra.toString());
+            inpPrecoCompra.setText(precoCompra.toString());
         } else {
-            inpStockIdeal.setText(BigDecimal.ZERO.toString());
+            inpPrecoCompra.setText(BigDecimal.ZERO.toString());
         }
         inpQtdeVendidos.setText(String.valueOf(produto.getSoldQuantity().intValue()));
         inpPrecoVenda.setText(produto.getPrice().toString());
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        SessionUtil.getInstance().clear();
+    }
 }
