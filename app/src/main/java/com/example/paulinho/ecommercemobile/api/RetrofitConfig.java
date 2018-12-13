@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitConfig {
 
     public static final String BASE_URL_MBL = "https://api.mercadolibre.com/sites/MLB/";
-    public static final String BASE_URL_PRODUTOS = "http://192.168.1.85:8081/";
+    public static final String BASE_URL_PRODUTOS = "http://omniatechnology.com.br/ECommerceWS/";
 
     public static Retrofit getBuilder(){
         return new Retrofit.Builder()
