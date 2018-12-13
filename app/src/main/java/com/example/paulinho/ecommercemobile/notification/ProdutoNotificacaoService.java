@@ -52,6 +52,11 @@ public class ProdutoNotificacaoService extends Service {
 
                 while(ativo){
 
+                    try {
+                        Thread.sleep(9000l);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
                     if(VerificaConexaoStrategy.verificarConexao(context)) {
 

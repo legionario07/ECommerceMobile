@@ -92,10 +92,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if(!ServiceUtil.isRunningService(this, ConstraintUtils.ECOMMERCE_MOBILE)){
-            Intent i = new Intent(this, ProdutoNotificacaoService.class);
-            startService(i);
-        }
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if(!ServiceUtil.isRunningService(getApplicationContext(), ConstraintUtils.ECOMMERCE_MOBILE)){
+                    Intent i = new Intent(getApplicationContext(), ProdutoNotificacaoService.class);
+                    startService(i);
+                }
+            }
+        });
+        t.start();
+
+
 
 
     }
