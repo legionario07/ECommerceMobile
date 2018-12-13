@@ -84,6 +84,7 @@ public class ProdutoServicesImpl{
                 }
 
                 if(produto!=null){
+                    produtoBody.setId(produto.getId());
                     produtoBody.setValorDeCompra(produto.getValorDeCompra());
                     produtoBody.setStockIdeal(produto.getStockIdeal());
                     produtoBody.setStockMin(produto.getStockMin());
