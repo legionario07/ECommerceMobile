@@ -42,7 +42,14 @@ public class ConverterToProduto {
     private static Parcela getParcela(LinkedTreeMap<String, String> object) {
         Parcela parcela = new Parcela();
 
+        if(object==null){
+            return new Parcela();
+        }
+
         String quantity = String.valueOf(object.get("quantity"));
+        if(quantity==null){
+            quantity = "0";
+        }
         parcela.setAmount(new BigDecimal(quantity));
 
         String rate = String.valueOf(object.get("rate"));

@@ -25,7 +25,6 @@ public class ProdutoDetail extends AppCompatActivity {
 
     private TextView txtTitle;
     private EditText inpQtdeDisponivel;
-    private EditText inpStockMin;
     private EditText inpStockIdeal;
     private EditText inpQtdeVendidos;
     private EditText inpPrecoCompra;
@@ -61,7 +60,6 @@ public class ProdutoDetail extends AppCompatActivity {
 
         txtTitle = findViewById(R.id.txtTitle);
         inpQtdeDisponivel = findViewById(R.id.inpQtdeDisponivel);
-        inpStockMin = findViewById(R.id.inpStockMin);
         inpStockIdeal = findViewById(R.id.inpStockIdeal);
         inpQtdeVendidos = findViewById(R.id.inpQtdeVendidos);
         inpPrecoCompra = findViewById(R.id.inpPrecoCompra);
@@ -75,7 +73,6 @@ public class ProdutoDetail extends AppCompatActivity {
         }
 
         if(savedInstanceState!=null){
-            inpStockMin.setText(savedInstanceState.getString("inpStockMin"));
             inpStockIdeal.setText(savedInstanceState.getString("inpStockIdeal"));
             inpPrecoCompra.setText(savedInstanceState.getString("inpPrecoCompra"));
         }
@@ -100,7 +97,6 @@ public class ProdutoDetail extends AppCompatActivity {
     }
 
     private void getDataInView(){
-        produto.setStockMin(Integer.valueOf(inpStockMin.getText().toString()));
         produto.setStockIdeal(Integer.valueOf(inpStockIdeal.getText().toString()));
         produto.setValorDeCompra(new BigDecimal(inpPrecoCompra.getText().toString()));
     }
@@ -109,7 +105,6 @@ public class ProdutoDetail extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putString("inpStockMin", inpStockMin.getText().toString());
         outState.putString("inpStockIdeal", inpStockIdeal.getText().toString());
         outState.putString("inpPrecoCompra", inpPrecoCompra.getText().toString());
 
@@ -120,11 +115,6 @@ public class ProdutoDetail extends AppCompatActivity {
         txtTitle.setText(produto.getTitle());
         inpQtdeDisponivel.setText(String.valueOf(produto.getAvailableQuantity().intValue()));
         Integer stockMin = produto.getStockMin();
-        if (stockMin != null) {
-            inpStockMin.setText(String.valueOf(stockMin.intValue()));
-        } else {
-            inpStockMin.setText(BigDecimal.ZERO.toString());
-        }
 
         Integer stockIdeal = produto.getStockIdeal();
         if (stockIdeal != null) {

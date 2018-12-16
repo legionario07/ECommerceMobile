@@ -60,6 +60,8 @@ public class ProdutoNotificacaoService extends Service {
 
                     if(VerificaConexaoStrategy.verificarConexao(context)) {
 
+                        Log.i(ConstraintUtils.LOG, "Verificando Produtos");
+
                         MBLServicesImpl services = new MBLServicesImpl();
                         DataForUser dados = services.getDataForUser(ConstraintUtils.CODIGO_CLIENTE);
 
@@ -69,7 +71,8 @@ public class ProdutoNotificacaoService extends Service {
                         }
 
                         for(Produto p : produtos) {
-                            if(p.getQteDisponivel()<=p.getStockIdeal()) {
+                            if((p.getQteDisponivel() !=null && p.getStockIdeal() !=null) && p.getQteDisponivel()<=p.getStockIdeal()) {
+                                Log.i(ConstraintUtils.LOG, "Criando notificacao: "+ p.getIdentificacao());
                                 Notification.criarNotificacao(context, "Produto com estoque baixo", p);
                             }
                         }

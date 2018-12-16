@@ -67,9 +67,8 @@ public class ProdutosAdapter extends RecyclerView.Adapter<ProdutoViewHolder> {
         }else{
             produtoViewHolder.imgProduct.setImageBitmap(BitmapFactory.decodeStream(ImagemUtils.getInputFromString(produto.getThumbnail())));
         }
-        //produtoViewHolder.txtQty.setText(produto.getAvailableQuantity().toString());
-        //produtoViewHolder.txtPrice.setText(produto.getPrice().toString());
 
+        produtoViewHolder.txtValorVenda.setText(produto.getPrice().toString());
 
     }
 

@@ -50,7 +50,7 @@
                     style="@style/txtCard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3.5"/>
+                    android:layout_weight="2.5"/>
 
                 <TextView
                     android:id="@+id/txtVendido"
@@ -58,7 +58,7 @@
                     android:gravity="left"
                     android:textStyle="bold"
                     android:layout_width="0dp"
-                    android:layout_weight="1.5"
+                    android:layout_weight="0.6"
                     android:layout_height="wrap_content" />
 
                 <TextView
@@ -66,7 +66,7 @@
                     android:text="@string/disp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3.5"/>
+                    android:layout_weight="2.5"/>
 
                 <TextView
                     style="@style/txtCard"
@@ -74,7 +74,23 @@
                     android:id="@+id/txtQuantidadeDisponivel"
                     android:layout_width="0dp"
                     android:gravity="left"
-                    android:layout_weight="1.5"
+                    android:layout_weight="0.6"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    style="@style/txtCard"
+                    android:text="@string/preco_venda"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"/>
+
+                <TextView
+                    style="@style/txtCard"
+                    android:textStyle="bold"
+                    android:id="@+id/txtValorVenda"
+                    android:layout_width="0dp"
+                    android:gravity="left"
+                    android:layout_weight="0.8"
                     android:layout_height="wrap_content" />
 
             </LinearLayout>

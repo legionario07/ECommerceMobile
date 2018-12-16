@@ -7,4 +7,5 @@
     <string name="valor_compra">Valor Compra</string>
     <string name="qtde_disponivel">Qtde Disponível</string>
     <string name="detalhes_produto">Detalhes do Produto</string>
+    <string name="preco_venda">Preço Venda</string>
 </resources>

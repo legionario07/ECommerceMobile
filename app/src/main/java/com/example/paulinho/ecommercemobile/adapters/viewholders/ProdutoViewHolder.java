@@ -16,6 +16,7 @@ public class ProdutoViewHolder extends RecyclerView.ViewHolder {
     public ImageView imgProduct;
     public TextView txtQuantidadeDisponivel;
     public TextView txtVendidos;
+    public TextView txtValorVenda;
 
 
     public ProdutoViewHolder(@NonNull View itemView,
@@ -27,6 +28,7 @@ public class ProdutoViewHolder extends RecyclerView.ViewHolder {
         imgProduct = itemView.findViewById(R.id.imgProduct);
         txtQuantidadeDisponivel = itemView.findViewById(R.id.txtQuantidadeDisponivel);
         txtVendidos = itemView.findViewById(R.id.txtVendido);
+        txtValorVenda = itemView.findViewById(R.id.txtValorVenda);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override

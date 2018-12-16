@@ -23,6 +23,12 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="txtCardRetract">
+        <!--<item name="android:textStyle">bold</item>-->
+        <item name="android:textSize">11sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="txtTextProdutoDetail">
         <item name="android:layout_weight">4</item>
         <item name="android:layout_width">0dp</item>
