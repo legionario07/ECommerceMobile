@@ -1,5 +1,6 @@
 package com.example.paulinho.ecommercemobile.views;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<Produto> produtos;
     private ProdutosAdapter adapterProdutos;
+    private ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
 
         atualizarDados();
 
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
     private void atualizarDados(){
         MBLServicesImpl services = new MBLServicesImpl();

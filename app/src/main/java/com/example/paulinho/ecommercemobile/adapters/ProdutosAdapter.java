@@ -17,6 +17,7 @@ import com.example.paulinho.ecommercemobile.model.Produto;
 import com.example.paulinho.ecommercemobile.utils.ImagemUtils;
 
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -60,7 +61,8 @@ public class ProdutosAdapter extends RecyclerView.Adapter<ProdutoViewHolder> {
 
         produtoViewHolder.txtTitle.setText(produto.getTitle());
         produtoViewHolder.txtVendidos.setText(String.valueOf(produto.getSoldQuantity().intValue()));
-        produtoViewHolder.txtQuantidadeDisponivel.setText(String.valueOf(produto.getAvailableQuantity().intValue()));
+        BigDecimal qtdeTotal = new BigDecimal(produto.getItem().getInitial_quantity());
+        produtoViewHolder.txtQuantidadeDisponivel.setText(String.valueOf(qtdeTotal.intValue()));
 
         if(produtoViewHolder.imgProduct.getDrawable()==null) {
             produtoViewHolder.imgProduct.setImageBitmap(BitmapFactory.decodeStream(produto.getThumbnailIS()));

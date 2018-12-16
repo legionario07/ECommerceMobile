@@ -3,12 +3,14 @@ package com.example.paulinho.ecommercemobile.converters;
 import com.example.paulinho.ecommercemobile.model.Atributo;
 import com.example.paulinho.ecommercemobile.model.DataForUser;
 import com.example.paulinho.ecommercemobile.model.Endereco;
+import com.example.paulinho.ecommercemobile.model.Item;
 import com.example.paulinho.ecommercemobile.model.Parcela;
 import com.example.paulinho.ecommercemobile.model.Produto;
 import com.example.paulinho.ecommercemobile.model.Remessa;
 import com.example.paulinho.ecommercemobile.model.Review;
 import com.example.paulinho.ecommercemobile.model.Tag;
 import com.example.paulinho.ecommercemobile.model.Vendedor;
+import com.example.paulinho.ecommercemobile.utils.ConstraintUtils;
 import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.internal.bind.ObjectTypeAdapter;
 
@@ -169,7 +171,8 @@ public class ConverterToProduto {
         produto.setCondition(object.get("condition").toString());
         produto.setPermalink(object.get("permalink").toString());
         produto.setThumbnail(object.get("thumbnail").toString());
-        produto.setThumbnailIS((InputStream) object.get("thumbnailIS"));
+        produto.setThumbnailIS((InputStream) object.get(ConstraintUtils.THUMBNAIL_IS));
+        produto.setItem((Item) object.get(ConstraintUtils.ITEM));
 
         String acceptsMercadoPago = String.valueOf(object.get("accepts_mercadopago"));
         produto.setAcceptsMercadoPago(new Boolean(acceptsMercadoPago));

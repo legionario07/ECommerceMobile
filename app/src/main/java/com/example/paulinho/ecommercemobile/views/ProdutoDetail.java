@@ -113,8 +113,8 @@ public class ProdutoDetail extends AppCompatActivity {
     private void setDataInView() {
 
         txtTitle.setText(produto.getTitle());
-        inpQtdeDisponivel.setText(String.valueOf(produto.getAvailableQuantity().intValue()));
-        Integer stockMin = produto.getStockMin();
+        BigDecimal qtdeTotal = new BigDecimal(produto.getItem().getInitial_quantity());
+        inpQtdeDisponivel.setText(String.valueOf(qtdeTotal.intValue()));
 
         Integer stockIdeal = produto.getStockIdeal();
         if (stockIdeal != null) {

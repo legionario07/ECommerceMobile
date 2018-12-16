@@ -22,7 +22,7 @@
         <ImageView
             android:id="@+id/imgProduct"
             android:layout_width="wrap_content"
-            android:layout_weight="1.2"
+            android:layout_weight="1"
             android:layout_gravity="center"
             android:layout_height="wrap_content" />
 
@@ -50,7 +50,7 @@
                     style="@style/txtCardRetract"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"/>
+                    android:layout_weight="1.8"/>
 
                 <TextView
                     android:id="@+id/txtVendido"
@@ -66,15 +66,15 @@
                     android:text="@string/disp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"/>
+                    android:layout_weight="1.8"/>
 
                 <TextView
                     style="@style/txtCardRetract"
                     android:textStyle="bold"
                     android:id="@+id/txtQuantidadeDisponivel"
                     android:layout_width="0dp"
-                    android:gravity="left"
-                    android:layout_weight="0.6"
+                    android:gravity="center"
+                    android:layout_weight="0.8"
                     android:layout_height="wrap_content" />
 
 

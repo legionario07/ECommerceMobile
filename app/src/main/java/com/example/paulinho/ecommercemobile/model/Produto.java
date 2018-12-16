@@ -11,6 +11,7 @@ import java.util.List;
 public class Produto implements Serializable {
 
     private Integer id;
+    private Item item;
     private String identificacao;
     private String siteId;
     private String title;
@@ -375,5 +376,13 @@ public class Produto implements Serializable {
 
     public void setTotalVendido(Integer totalVendido) {
         this.totalVendido = totalVendido;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 }

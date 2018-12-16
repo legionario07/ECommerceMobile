@@ -8,7 +8,7 @@ import retrofit2.http.Query;
 
 public interface MBLServices {
 
-    String SEARCH = "search";
+    String SEARCH = "sites/MLB/search/";
 
     @GET(SEARCH)
     Call<DataForUser> getDataForUser(@Query("seller_id") Integer sellerID);
