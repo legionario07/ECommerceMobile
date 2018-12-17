@@ -1,6 +1,5 @@
 package com.example.paulinho.ecommercemobile.views;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -15,10 +14,7 @@ import android.widget.Toast;
 
 import com.example.paulinho.ecommercemobile.R;
 import com.example.paulinho.ecommercemobile.adapters.ProdutosAdapter;
-import com.example.paulinho.ecommercemobile.api.services.impl.MBLServicesImpl;
 import com.example.paulinho.ecommercemobile.api.services.impl.ProdutoServicesImpl;
-import com.example.paulinho.ecommercemobile.converters.ConverterToProduto;
-import com.example.paulinho.ecommercemobile.model.DataForUser;
 import com.example.paulinho.ecommercemobile.model.Produto;
 import com.example.paulinho.ecommercemobile.notification.ProdutoNotificacaoService;
 import com.example.paulinho.ecommercemobile.utils.ConstraintUtils;
@@ -33,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private List<Produto> produtos;
     private ProdutosAdapter adapterProdutos;
-    private ProgressDialog dialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +43,10 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         recyclerView = findViewById(R.id.recyclerView);
+        produtos = SessionUtil.getInstance().getProdutos();
 
-        if(!VerificaConexaoStrategy.verificarConexao(this)){
-            Toast.makeText(this, "Verifique sua conexão com a Internet",Toast.LENGTH_LONG).show();
+        if (!VerificaConexaoStrategy.verificarConexao(this)) {
+            Toast.makeText(this, "Verifique sua conexão com a Internet", Toast.LENGTH_LONG).show();
         }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -96,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                if(!ServiceUtil.isRunningService(getApplicationContext(), ConstraintUtils.ECOMMERCE_MOBILE)){
+                if (!ServiceUtil.isRunningService(getApplicationContext(), ConstraintUtils.ECOMMERCE_MOBILE)) {
                     Intent i = new Intent(getApplicationContext(), ProdutoNotificacaoService.class);
                     startService(i);
                 }
@@ -105,20 +102,25 @@ public class MainActivity extends AppCompatActivity {
         t.start();
 
 
+    }
 
+    @Override
+    public void finish() {
+        super.finish();
+        SessionUtil.getInstance().clear();
+        Intent i = new Intent(this, UserLogin.class);
+       i.putExtra("FINISH", "");
+        startActivity(i);
 
     }
 
 
-    private void atualizarDados(){
-        MBLServicesImpl services = new MBLServicesImpl();
-        DataForUser dados = services.getDataForUser(ConstraintUtils.CODIGO_CLIENTE);
+    private void atualizarDados() {
 
-        produtos = ConverterToProduto.getProductsForDataForUser(dados);
 
-        if(adapterProdutos ==null){
+        if (adapterProdutos == null) {
             adapterProdutos = new ProdutosAdapter(this, produtos);
-        }else{
+        } else {
             adapterProdutos.updateList(produtos);
         }
 

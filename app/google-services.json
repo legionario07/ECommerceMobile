@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "100413639670",
+    "firebase_url": "https://ecommercemobile-cacea.firebaseio.com",
+    "project_id": "ecommercemobile-cacea",
+    "storage_bucket": "ecommercemobile-cacea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:100413639670:android:2a189aea1c9c750a",
+        "android_client_info": {
+          "package_name": "com.example.paulinho.ecommercemobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "100413639670-k06ok5dhhmidjne8jdcjgh7aggagvunt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.paulinho.ecommercemobile",
+            "certificate_hash": "2c8ec4f25d8aa4cd84a7264aaa20ae07513155ff"
+          }
+        },
+        {
+          "client_id": "100413639670-073fn3b83236d7niq2s70bg0gbddo3tk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBX_xTzEsLeaakdItrjOgS2dyVetrS9b8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "100413639670-073fn3b83236d7niq2s70bg0gbddo3tk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

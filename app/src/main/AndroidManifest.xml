@@ -4,10 +4,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-
-
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -20,32 +23,37 @@
             android:name=".views.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".views.ProdutoDetail"
+            android:label="@string/detalhes_produto"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".views.UserLogin">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity
-            android:name=".views.ProdutoDetail"
-            android:label="@string/detalhes_produto"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
 
-
-        <service android:name="com.example.paulinho.ecommercemobile.notification.ProdutoNotificacaoService"
+        <service
+            android:name=".notification.ProdutoNotificacaoService"
             android:label="PartidaNotificacaoService">
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <action android:name="TOTAL_PARTIDAS"/>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="TOTAL_PARTIDAS" />
             </intent-filter>
         </service>
 
         <receiver
-            android:name="com.example.paulinho.ecommercemobile.broadcast.BootReceiver"
+            android:name=".broadcast.BootReceiver"
             android:label="BootReceiver"
-            android:permission="android.permission.RECEIVE_BOOT_COMPLETED" >
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
