@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,7 +22,9 @@ import android.widget.Toast;
 import com.example.paulinho.ecommercemobile.R;
 import com.example.paulinho.ecommercemobile.adapters.ConfiguracoesAdapter;
 import com.example.paulinho.ecommercemobile.adapters.ProdutosAdapter;
+import com.example.paulinho.ecommercemobile.api.RetrofitConfig;
 import com.example.paulinho.ecommercemobile.api.services.ConfiguracaoServices;
+import com.example.paulinho.ecommercemobile.api.services.impl.ConfiguracaoServicesImpl;
 import com.example.paulinho.ecommercemobile.api.services.impl.ProdutoServicesImpl;
 import com.example.paulinho.ecommercemobile.model.Configuracao;
 import com.example.paulinho.ecommercemobile.model.Produto;
@@ -30,11 +33,14 @@ import com.example.paulinho.ecommercemobile.utils.SessionUtil;
 
 import java.util.List;
 
+import retrofit2.Retrofit;
+import rx.Observer;
+import rx.schedulers.Schedulers;
+
 public class ConfiguracaoActivity extends AppCompatActivity {
 
     private List<Configuracao> configuracoes;
     private TextView txtNoData;
-    private ConfiguracaoServices configuracaoServices;
     private RecyclerView recViewConfiguracao;
     private ConfiguracoesAdapter configuracoesAdapter;
     private Configuracao configuracao;
@@ -46,6 +52,8 @@ public class ConfiguracaoActivity extends AppCompatActivity {
 
     private EditText inpPropriedade;
     private EditText inpValor;
+
+    private ConfiguracaoServicesImpl configuracaoServices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,9 +100,42 @@ public class ConfiguracaoActivity extends AppCompatActivity {
         });
 
         registerForContextMenu(recViewConfiguracao);
+        configuracaoServices = new ConfiguracaoServicesImpl();
 
     }
 
+    private void getConfiguracoes(){
+
+        Retrofit retrofit = RetrofitConfig.getBuilderWS(true);
+        ConfiguracaoServices services = retrofit.create(ConfiguracaoServices.class);
+
+
+        services.findAll().subscribeOn(Schedulers.newThread())
+                .subscribe(new Observer<List<Configuracao>>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.i(ConstraintUtils.LOG, "completed");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<Configuracao> configs) {
+                        SessionUtil.getInstance().setConfiguracoes(configs);
+                        for (Configuracao c : configs) {
+                            SessionUtil.getInstance().getMapConfiguraces().put(c.getPropriedade(), c.getValor());
+                        }
+
+                        configuracoes = SessionUtil.getInstance().getConfiguracoes();
+                        atualizarDados();
+                    }
+                });
+
+
+    }
 
     private void atualizarDados() {
 
@@ -108,56 +149,6 @@ public class ConfiguracaoActivity extends AppCompatActivity {
 
     }
 
-    private void showDialog(String opcao){
-
-//        final AlertDialog.Builder dialogCrud = new AlertDialog.Builder(this);
-//
-//        LayoutInflater inflater = getLayoutInflater();
-//        final View dialogView = inflater.inflate(R.layout.dialog_nova_configuracao, null);
-//        dialogCrud.setView(dialogView);
-//        dialogCrud.setTitle(opcao);
-//
-//        final View.OnClickListener criarDialog = new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-////                if (imgButtonNewCrud.getId() == view.getId()) {
-////                    furo = new Furo();
-////                    criarDialogCRUD(IFlagment.CADASTRAR);
-////                } else if (imgButtonDeleteCrud.getId() == view.getId()) {
-////                    criarDialogCRUD(IFlagment.DELETAR);
-////                } else {
-////                    criarDialogCRUD(IFlagment.EDITAR);
-////                }
-////
-////                alert.dismiss();
-//            }
-//
-//        };
-//
-//        imgButtonNewCrud =  dialogView.findViewById(R.id.imgButtonNewCrud);
-//        imgButtonDeleteCrud =  dialogView.findViewById(R.id.imgButtonDeleteCrud);
-//        imgButtonEditCrud =  dialogView.findViewById(R.id.imgButtonEditCrud);
-//
-//        imgButtonNewCrud.setOnClickListener(criarDialog);
-//        imgButtonDeleteCrud.setOnClickListener(criarDialog);
-//        imgButtonEditCrud.setOnClickListener(criarDialog);
-//
-//        dialogCrud.setNegativeButton("CANCELAR", new DialogInterface.OnClickListener()
-//
-//        {
-//            @Override
-//            public void onClick(DialogInterface dialogInterface, int i) {
-//                dialogInterface.cancel();
-//                return;
-//            }
-//        });
-//
-//        alert = dialogCrud.create();
-//        alert.show();
-//
-
-
-    }
 
     private void criarDialogCRUD(final String operacao) {
 
@@ -192,32 +183,21 @@ public class ConfiguracaoActivity extends AppCompatActivity {
                     return;
                 }
 
-//
-//                if (operacao.equals(ConstraintUtils.EXCLUIR)) {
-//                    foiPersistido = ServicesImpl.delete(new FuroServiceImpl(), furo.getId());
-//                } else {
-//
-//                    furo = (Furo) ServicesImpl.save(new FuroServiceImpl(), furo);
-//
-//                    if(furo!=null){
-//                        foiPersistido = true;
-//                    }
-//
-//                }
-//
-//                if (foiPersistido) {
-//                    ServicesImpl.findAll(new FuroServiceImpl());
-//                    try {
-//                        Thread.sleep(TEMPO_SLEEP);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                    atualizarListView();
-//                    Toast.makeText(getApplicationContext(), "Operação realizada com sucesso", Toast.LENGTH_LONG).show();
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "Operação não pode ser realizada", Toast.LENGTH_LONG).show();
-//                }
+                configuracao = new Configuracao();
+                configuracao.setValor(inpValor.getText().toString());
+                configuracao.setPropriedade(inpPropriedade.getText().toString());
+
+                if(operacao.equalsIgnoreCase(ConstraintUtils.CADASTRAR)){
+                    configuracaoServices.save(configuracao);
+                }
+
+                try {
+                    Thread.sleep(500l);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                atualizarDados();
 
             }
         })
@@ -238,7 +218,15 @@ public class ConfiguracaoActivity extends AppCompatActivity {
     }
 
     private String validar(){
-        return "";
+        StringBuilder erro = new StringBuilder();
+
+        if(inpPropriedade.getText().toString().isEmpty()){
+            erro.append("Propriedade não pode ser vazia");
+        }else if(inpValor.getText().toString().isEmpty()){
+            erro.append("Valor não pode ser vazio");
+        }
+
+        return erro.toString();
     }
 
 

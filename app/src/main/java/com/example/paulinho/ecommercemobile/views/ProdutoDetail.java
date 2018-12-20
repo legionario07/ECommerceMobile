@@ -21,6 +21,7 @@ import com.example.paulinho.ecommercemobile.utils.ConstraintUtils;
 import com.example.paulinho.ecommercemobile.utils.SessionUtil;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class ProdutoDetail extends AppCompatActivity {
 
@@ -143,13 +144,13 @@ public class ProdutoDetail extends AppCompatActivity {
 
 
 
-        } else if (produto.getListingTypeId().equalsIgnoreCase(AnuncioType.CLASSICO.getValue())) {
+        } else if (produto.getListingTypeId().equalsIgnoreCase(AnuncioType.PREMIUM.getValue())) {
             tarifa = new BigDecimal(SessionUtil.getInstance().getMapConfiguraces().get(ConstraintUtils.TARIFA_PREMIUM));
 
         }
 
-        tarifa = tarifa.multiply(new BigDecimal("100"));
-        total = total.subtract(total.multiply(tarifa));
+        tarifa = tarifa.divide(new BigDecimal("100"));
+        total = total.subtract(total.multiply(tarifa)).setScale(2, RoundingMode.HALF_EVEN);
 
         if(produto.getPrice().compareTo(new BigDecimal(SessionUtil.getInstance().getMapConfiguraces().get(ConstraintUtils.VALOR_PRODUTO_TAXA)))==-1){
             BigDecimal valorVendaUnitaria = new BigDecimal(SessionUtil.getInstance().getMapConfiguraces().get(ConstraintUtils.VALOR_VENDA_UNITARIA));
