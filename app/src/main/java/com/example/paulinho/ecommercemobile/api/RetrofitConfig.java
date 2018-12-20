@@ -34,7 +34,7 @@ public class RetrofitConfig {
 
     public static Retrofit getBuilderWS(boolean isRxJava){
         return new Retrofit.Builder()
-                .baseUrl(BASE_URL_MBL)
+                .baseUrl(BASE_URL_WS)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
