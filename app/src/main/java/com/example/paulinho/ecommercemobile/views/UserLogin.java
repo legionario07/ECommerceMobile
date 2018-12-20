@@ -158,7 +158,7 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
 
     private void getConfiguracoes() {
 
-        Retrofit retrofit = RetrofitConfig.getBuilder(true);
+        Retrofit retrofit = RetrofitConfig.getBuilderWS(true);
         services = retrofit.create(ConfiguracaoServices.class);
 
 
