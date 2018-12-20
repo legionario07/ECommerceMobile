@@ -3,4 +3,14 @@
     <color name="colorPrimary">#003a85</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorLogin">#d6d6d6</color>
+    <color name="backgroundCinza">#dcdcdc</color>
+    <color name="textColumn">@android:color/holo_red_dark</color>
+    <color name="titulos">@android:color/holo_green_dark</color>
+    <color name="backgroundListView">#ffffff</color>
+    <color name="dialogInput">#f6f6f6</color>
+    <color name="cinza">#808080</color>
+    <color name="backgroundDialogCrud">#fafad2</color>
+    <color name="colorItemListView">#000000</color>
+    <color name="backgroundDialog">#ffffe0</color>
 </resources>

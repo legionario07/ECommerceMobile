@@ -80,7 +80,7 @@
 
             <TextView
                 style="@style/txtTextProdutoDetail"
-                android:text="Preço Compra" />
+                android:text="@string/preco_compra" />
 
             <EditText
                 android:id="@+id/inpPrecoCompra"
@@ -96,10 +96,28 @@
 
             <TextView
                 style="@style/txtTextProdutoDetail"
-                android:text="Preço Venda" />
+                android:text="@string/preco_venda" />
 
             <EditText
                 android:id="@+id/inpPrecoVenda"
+                android:enabled="false"
+                style="@style/txInputProdutoDetail"
+                android:inputType="numberDecimal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/txtTextProdutoDetail"
+                android:text="@string/valor_liquido" />
+
+            <EditText
+                android:tooltipText="@string/valor_final_sem_taxas"
+                android:id="@+id/inpValorLiquido"
                 android:enabled="false"
                 style="@style/txInputProdutoDetail"
                 android:inputType="numberDecimal" />

@@ -22,9 +22,7 @@
         <activity
             android:name=".views.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".views.ProdutoDetail"
             android:label="@string/detalhes_produto"
@@ -35,7 +33,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <service
@@ -57,6 +54,7 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".views.ConfiguracaoActivity"></activity>
     </application>
 
 </manifest>

@@ -21,4 +21,12 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="CONFIGURACOES">CONFIGURAÇÕES</string>
+    <string name="valor">Valor</string>
+    <string name="propriedade">Propriedade</string>
+    <string name="configuracao">Configuração</string>
+    <string name="sem_configuracoes">SEM CONFIGURAÇÕES CADASTRADAS</string>
+    <string name="preco_compra">Preço Compra</string>
+    <string name="valor_final_sem_taxas">Valor Final Sem Taxas</string>
+    <string name="valor_liquido">Valor Líquido</string>
 </resources>

@@ -20,7 +20,7 @@ public class ProdutoServicesImpl{
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                retrofit = RetrofitConfig.getBuilderProduto();
+                retrofit = RetrofitConfig.getBuilderWS();
                 services = retrofit.create(ProdutoServices.class);
 
                 try {
@@ -47,7 +47,7 @@ public class ProdutoServicesImpl{
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                retrofit = RetrofitConfig.getBuilderProduto();
+                retrofit = RetrofitConfig.getBuilderWS();
                 services = retrofit.create(ProdutoServices.class);
 
                 try {
@@ -74,7 +74,7 @@ public class ProdutoServicesImpl{
         Thread t = new Thread(new Runnable() {
             @Override
             public void run() {
-                retrofit = RetrofitConfig.getBuilderProduto();
+                retrofit = RetrofitConfig.getBuilderWS();
                 services = retrofit.create(ProdutoServices.class);
 
                 try {

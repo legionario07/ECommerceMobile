@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.ConfiguracaoActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            style="@style/txtTitle"
+            android:text="@string/CONFIGURACOES"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/txtTtuloColumn"
+                android:text="@string/propriedade"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"/>
+
+            <TextView
+                style="@style/txtTtuloColumn"
+                android:text="@string/valor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"/>
+
+        </LinearLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recViewConfiguracoes"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"
+            tools:ignore="MissingConstraints"
+
+            />
+
+        <TextView
+            android:visibility="gone"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:id="@+id/txtNoData"
+            android:text="@string/sem_configuracoes"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="9"/>
+
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabNovaConfiguracao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/ic_add_circle_red_24dp" />
+
+
+</FrameLayout>

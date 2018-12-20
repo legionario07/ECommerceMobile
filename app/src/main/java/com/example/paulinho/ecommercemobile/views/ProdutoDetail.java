@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.paulinho.ecommercemobile.R;
 import com.example.paulinho.ecommercemobile.api.services.impl.ProdutoServicesImpl;
+import com.example.paulinho.ecommercemobile.enuns.AnuncioType;
 import com.example.paulinho.ecommercemobile.model.Produto;
 import com.example.paulinho.ecommercemobile.utils.ConstraintUtils;
 import com.example.paulinho.ecommercemobile.utils.SessionUtil;
@@ -29,6 +30,7 @@ public class ProdutoDetail extends AppCompatActivity {
     private EditText inpQtdeVendidos;
     private EditText inpPrecoCompra;
     private EditText inpPrecoVenda;
+    private EditText inpValorLiquido;
 
     private Produto produto;
 
@@ -39,7 +41,6 @@ public class ProdutoDetail extends AppCompatActivity {
         setContentView(R.layout.activity_produto_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabSave);
@@ -64,6 +65,7 @@ public class ProdutoDetail extends AppCompatActivity {
         inpQtdeVendidos = findViewById(R.id.inpQtdeVendidos);
         inpPrecoCompra = findViewById(R.id.inpPrecoCompra);
         inpPrecoVenda = findViewById(R.id.inpPrecoVenda);
+        inpValorLiquido = findViewById(R.id.inpValorLiquido);
 
         produto = SessionUtil.getInstance().getProduto();
 
@@ -72,7 +74,7 @@ public class ProdutoDetail extends AppCompatActivity {
             setDataInView();
         }
 
-        if(savedInstanceState!=null){
+        if (savedInstanceState != null) {
             inpStockIdeal.setText(savedInstanceState.getString("inpStockIdeal"));
             inpPrecoCompra.setText(savedInstanceState.getString("inpPrecoCompra"));
         }
@@ -86,17 +88,17 @@ public class ProdutoDetail extends AppCompatActivity {
         ProdutoServicesImpl produtoServices = new ProdutoServicesImpl();
         produto = produtoServices.save(produto);
 
-        if(produto!=null){
-            Toast.makeText(this, "Salvo com sucesso",Toast.LENGTH_LONG).show();
+        if (produto != null) {
+            Toast.makeText(this, "Salvo com sucesso", Toast.LENGTH_LONG).show();
             finish();
-        }else{
-            Toast.makeText(this, "Erro ao salvar produto",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Erro ao salvar produto", Toast.LENGTH_LONG).show();
 
         }
 
     }
 
-    private void getDataInView(){
+    private void getDataInView() {
         produto.setStockIdeal(Integer.valueOf(inpStockIdeal.getText().toString()));
         produto.setValorDeCompra(new BigDecimal(inpPrecoCompra.getText().toString()));
     }
@@ -131,6 +133,31 @@ public class ProdutoDetail extends AppCompatActivity {
         }
         inpQtdeVendidos.setText(String.valueOf(produto.getSoldQuantity().intValue()));
         inpPrecoVenda.setText(produto.getPrice().toString());
+
+        BigDecimal total = produto.getPrice();
+        BigDecimal tarifa = BigDecimal.ONE;
+
+        if (produto.getListingTypeId().equalsIgnoreCase(AnuncioType.CLASSICO.getValue())) {
+            tarifa = new BigDecimal(SessionUtil.getInstance().getMapConfiguraces().get(ConstraintUtils.TARIFA_CLASSICO));
+
+
+
+
+        } else if (produto.getListingTypeId().equalsIgnoreCase(AnuncioType.CLASSICO.getValue())) {
+            tarifa = new BigDecimal(SessionUtil.getInstance().getMapConfiguraces().get(ConstraintUtils.TARIFA_PREMIUM));
+
+        }
+
+        tarifa = tarifa.multiply(new BigDecimal("100"));
+        total = total.subtract(total.multiply(tarifa));
+
+        if(produto.getPrice().compareTo(new BigDecimal(SessionUtil.getInstance().getMapConfiguraces().get(ConstraintUtils.VALOR_PRODUTO_TAXA)))==-1){
+            BigDecimal valorVendaUnitaria = new BigDecimal(SessionUtil.getInstance().getMapConfiguraces().get(ConstraintUtils.VALOR_VENDA_UNITARIA));
+            total = total.subtract(valorVendaUnitaria);
+        }
+
+        inpValorLiquido.setText(total.toString());
+
     }
 
     @Override
