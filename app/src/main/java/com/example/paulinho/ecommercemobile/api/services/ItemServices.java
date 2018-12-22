@@ -20,5 +20,9 @@ public interface ItemServices {
     @GET(BASE_URL_ITEMS+"{Item_id}")
     Call<Item> findById(@Path("Item_id") String itemId);
 
+    @GET(BASE_URL_ITEMS)
+    Call<List<Item>> findAll();
+
+
 }
 

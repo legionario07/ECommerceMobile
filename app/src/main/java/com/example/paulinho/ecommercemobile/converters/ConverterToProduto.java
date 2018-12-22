@@ -172,7 +172,7 @@ public class ConverterToProduto {
         produto.setPermalink(object.get("permalink").toString());
         produto.setThumbnail(object.get("thumbnail").toString());
         produto.setThumbnailIS((InputStream) object.get(ConstraintUtils.THUMBNAIL_IS));
-        produto.setItem((Item) object.get(ConstraintUtils.ITEM));
+       // produto.setItem((Item) object.get(ConstraintUtils.ITEM));
 
         String acceptsMercadoPago = String.valueOf(object.get("accepts_mercadopago"));
         produto.setAcceptsMercadoPago(new Boolean(acceptsMercadoPago));

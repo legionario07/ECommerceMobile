@@ -12,6 +12,7 @@ import com.example.paulinho.ecommercemobile.converters.ConverterToProduto;
 import com.example.paulinho.ecommercemobile.model.DataForUser;
 import com.example.paulinho.ecommercemobile.model.Produto;
 import com.example.paulinho.ecommercemobile.utils.ConstraintUtils;
+import com.example.paulinho.ecommercemobile.utils.SessionUtil;
 import com.example.paulinho.ecommercemobile.utils.VerificaConexaoStrategy;
 
 import java.util.List;
@@ -66,6 +67,7 @@ public class ProdutoNotificacaoService extends Service {
                         DataForUser dados = services.getDataForUser(ConstraintUtils.CODIGO_CLIENTE);
 
                         List<Produto> produtos = ConverterToProduto.getProductsForDataForUser(dados);
+                        SessionUtil.getInstance().setProdutos(produtos);
                         for(Produto p : produtos){
                             p = new ProdutoServicesImpl().findBySku(p, p.getSku());
                         }

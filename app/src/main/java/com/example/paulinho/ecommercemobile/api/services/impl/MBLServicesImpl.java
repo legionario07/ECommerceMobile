@@ -35,7 +35,6 @@ public class MBLServicesImpl {
                 if(dataForUser!=null){
                     for(Object o : dataForUser.getResults()){
                         LinkedTreeMap<String,Object> map = (LinkedTreeMap<String, Object>) o;
-                        new ItemServicesImpl().findById((String) map.get("id"), map);
                         map.put(ConstraintUtils.THUMBNAIL_IS, ImagemUtils.getInputFromString((String) map.get("thumbnail")));
                     }
                 }

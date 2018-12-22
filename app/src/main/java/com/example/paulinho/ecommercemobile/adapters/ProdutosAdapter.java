@@ -61,8 +61,8 @@ public class ProdutosAdapter extends RecyclerView.Adapter<ProdutoViewHolder> {
 
         produtoViewHolder.txtTitle.setText(produto.getTitle());
         produtoViewHolder.txtVendidos.setText(String.valueOf(produto.getSoldQuantity().intValue()));
-        BigDecimal qtdeTotal = new BigDecimal(produto.getItem().getInitial_quantity());
-        produtoViewHolder.txtQuantidadeDisponivel.setText(String.valueOf(qtdeTotal.intValue()));
+        //BigDecimal qtdeTotal = new BigDecimal(produto.getItem().getInitial_quantity());
+        //produtoViewHolder.txtQuantidadeDisponivel.setText(String.valueOf(qtdeTotal.intValue()));
 
         if(produtoViewHolder.imgProduct.getDrawable()==null) {
             produtoViewHolder.imgProduct.setImageBitmap(BitmapFactory.decodeStream(produto.getThumbnailIS()));

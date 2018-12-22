@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.paulinho.ecommercemobile.R;
 import com.example.paulinho.ecommercemobile.adapters.ProdutosAdapter;
+import com.example.paulinho.ecommercemobile.api.services.impl.ItemServicesImpl;
 import com.example.paulinho.ecommercemobile.api.services.impl.ProdutoServicesImpl;
 import com.example.paulinho.ecommercemobile.model.Produto;
 import com.example.paulinho.ecommercemobile.notification.ProdutoNotificacaoService;
@@ -81,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 Produto produto = produtos.get(position);
 
+                produto.setItem(new ItemServicesImpl().findById(produto.getIdentificacao()));
                 produto = new ProdutoServicesImpl().findBySku(produto, produto.getSku());
 
                 SessionUtil.getInstance().clear();

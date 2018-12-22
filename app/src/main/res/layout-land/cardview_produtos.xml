@@ -61,7 +61,7 @@
                     android:layout_weight="0.6"
                     android:layout_height="wrap_content" />
 
-                <TextView
+         <!--       <TextView
                     style="@style/txtCard"
                     android:text="@string/disp"
                     android:layout_width="0dp"
@@ -75,7 +75,7 @@
                     android:layout_width="0dp"
                     android:gravity="left"
                     android:layout_weight="0.6"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content" />-->
 
                 <TextView
                     style="@style/txtCard"

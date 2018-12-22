@@ -14,12 +14,15 @@ import com.example.paulinho.ecommercemobile.R;
 import com.example.paulinho.ecommercemobile.api.RetrofitConfig;
 import com.example.paulinho.ecommercemobile.api.services.ConfiguracaoServices;
 import com.example.paulinho.ecommercemobile.api.services.impl.ConfiguracaoServicesImpl;
+import com.example.paulinho.ecommercemobile.api.services.impl.ItemServicesImpl;
 import com.example.paulinho.ecommercemobile.api.services.impl.MBLServicesImpl;
 import com.example.paulinho.ecommercemobile.converters.ConverterToProduto;
 import com.example.paulinho.ecommercemobile.model.Configuracao;
 import com.example.paulinho.ecommercemobile.model.DataForUser;
+import com.example.paulinho.ecommercemobile.model.Item;
 import com.example.paulinho.ecommercemobile.model.Produto;
 import com.example.paulinho.ecommercemobile.utils.ConstraintUtils;
+import com.example.paulinho.ecommercemobile.utils.ImagemUtils;
 import com.example.paulinho.ecommercemobile.utils.SessionUtil;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -38,6 +41,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.gson.internal.LinkedTreeMap;
 
 import java.io.IOException;
 import java.util.List;
@@ -56,9 +60,10 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
     private List<Produto> produtos;
     private List<Configuracao> configuracoes;
     private ConfiguracaoServices services;
+    private  DataForUser dados;
 
 
-    private GoogleApiClient mGoogleApiClient;
+        private GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,65 +189,39 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
                     }
                 });
 
-        //VERIFICA SE TEM CONFIGURAÇOES PADRÕES
-        try {
-            verificarConfiguracoesPadroes();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
-    private void verificarConfiguracoesPadroes() throws IOException {
-        ConfiguracaoServicesImpl services = new ConfiguracaoServicesImpl();
-
-        if (!SessionUtil.getInstance().getMapConfiguraces().containsKey(ConstraintUtils.TARIFA_CLASSICO)) {
-            Configuracao c = new Configuracao();
-            c.setPropriedade(ConstraintUtils.TARIFA_CLASSICO);
-            c.setValor("11");
-
-
-            c = services.save(c);
-        }
-
-
-        if (!SessionUtil.getInstance().getMapConfiguraces().containsKey(ConstraintUtils.TARIFA_PREMIUM)) {
-            Configuracao c = new Configuracao();
-            c.setPropriedade(ConstraintUtils.TARIFA_PREMIUM);
-            c.setValor("16");
-
-            c = services.save(c);
-        }
-
-
-        if (!SessionUtil.getInstance().getMapConfiguraces().containsKey(ConstraintUtils.VALOR_PRODUTO_TAXA)) {
-            Configuracao c = new Configuracao();
-            c.setPropriedade(ConstraintUtils.VALOR_PRODUTO_TAXA);
-            c.setValor("120");
-
-
-            c = services.save(c);
-        }
-
-        if (!SessionUtil.getInstance().getMapConfiguraces().containsKey(ConstraintUtils.VALOR_VENDA_UNITARIA)) {
-            Configuracao c = new Configuracao();
-            c.setPropriedade(ConstraintUtils.VALOR_VENDA_UNITARIA);
-            c.setValor("5");
-
-
-            c = services.save(c);
-
-        }
-
-    }
 
     private void getProdutos() {
 
         MBLServicesImpl services = new MBLServicesImpl();
-        DataForUser dados = services.getDataForUser(ConstraintUtils.CODIGO_CLIENTE);
+        dados = services.getDataForUser(ConstraintUtils.CODIGO_CLIENTE);
+
         produtos = ConverterToProduto.getProductsForDataForUser(dados);
 
+//        Thread t = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//
+//                for (Object o : dados.getResults()) {
+//                    LinkedTreeMap<String, Object> map = (LinkedTreeMap<String, Object>) o;
+//                    //new ItemServicesImpl().findById((String) map.get("id"), map);
+//                    //map.put(ConstraintUtils.THUMBNAIL_IS, ImagemUtils.getInputFromString((String) map.get("thumbnail")));
+//                    for (Produto produto : produtos) {
+//                        if (produto.getIdentificacao().equalsIgnoreCase((String) map.get("id"))) {
+//                            produto.setItem((Item) map.get(ConstraintUtils.ITEM));
+//                        }
+//                    }
+//                }
+//
+//            }
+//        });
+//        t.start();
+
+
         SessionUtil.getInstance().setProdutos(produtos);
+
     }
 
     @Override
@@ -254,7 +233,7 @@ public class UserLogin extends AppCompatActivity implements View.OnClickListener
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (dialog != null) {
+        if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
         }
     }
